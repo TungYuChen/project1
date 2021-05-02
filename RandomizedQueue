@@ -66,12 +66,12 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     }
 
     private class RandomQIterator implements Iterator<Item> {
-        private final int order = StdRandom.uniform(numberOfItem);
+        private final int order = 0;
         private Item current = randomizedQueue[order];
 
 
         public boolean hasNext() {
-            return current != null;
+            return order+1 > numberOfItem;
         }
 
         public void remove() {
@@ -79,11 +79,11 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         }
 
         public Item next() {
-            if (current == null) {
+            if (current == null || order > numberOfItem) {
                 throw new NoSuchElementException();
             }
             Item result = current;
-            current = randomizedQueue[StdRandom.uniform(order + 1)];
+            current = randomizedQueue[order + 1];
             return result;
         }
     }
@@ -100,6 +100,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         for (int i = 0; i < 10; i++) {
             System.out.println(rdQ.sample());
         }
+        System.out.println(rdQ.iterator().next());
         for (int i = 0; i < 10; i++) {
             System.out.println(rdQ.dequeue());
         }
