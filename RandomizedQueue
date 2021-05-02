@@ -29,8 +29,10 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         if(item == null) {
             throw new IllegalArgumentException();
         }
-        if (numberOfItem == randomizedQueue.length) {
+        if (numberOfItem + 1 == randomizedQueue.length) {
+            Item[] copy = randomizedQueue;
             randomizedQueue = (Item[]) new Object[2 * randomizedQueue.length];
+            System.arraycopy(copy,0,randomizedQueue,0,numberOfItem);
         }
         randomizedQueue[numberOfItem] = item;
         numberOfItem++;
@@ -94,11 +96,14 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         for (int i = 0; i < 10; i++) {
             rdQ.enqueue(i);
         }
-        for (Integer i : rdQ) {
-            System.out.println(i);
+        System.out.println(rdQ.size());
+        for (int i = 0; i < 10; i++) {
+            System.out.println(rdQ.sample());
         }
-        System.out.println(rdQ.sample());
-        System.out.println(rdQ.dequeue());
+        for (int i = 0; i < 10; i++) {
+            System.out.println(rdQ.dequeue());
+        }
+        System.out.println(rdQ.size());
 
     }
 
