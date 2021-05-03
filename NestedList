@@ -17,10 +17,11 @@
  */
 public class NestedIterator implements Iterator<Integer> {
     List<Integer> list = new ArrayList<>();
-    int count = 0;
+    private final Iterator<Integer> it;
 
     public NestedIterator(List<NestedInteger> nestedList) {
         reading(nestedList);
+        this.it = list.iterator();
     }
     
     public void reading(List<NestedInteger> nlist) {
@@ -35,17 +36,12 @@ public class NestedIterator implements Iterator<Integer> {
 
     @Override
     public Integer next() {
-        count++;
-        return list.get(count-1);
+        return this.it.next();
     }
 
     @Override
     public boolean hasNext() {
-        if (count < list.size()) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.it.hasNext();
     }
 }
 
