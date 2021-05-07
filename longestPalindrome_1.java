@@ -6,6 +6,9 @@ class Solution {
         int count = 1;
         for (int i = 0; i < ch.length; i++) {
             for (int j = ch.length -1; j > i; j--) {
+                if (j - i + 1 <= count) {
+                    break;
+                }
                 int start = i;
                 int end = j;
                 while (ch[start] == ch[end]) {
